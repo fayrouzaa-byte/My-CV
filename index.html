@@ -1,293 +1,368 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feyrouz Mehalaine | Operations & Partnerships Manager</title>
+    <title>Feyrouz Mehalaine | Operations & Automation Expert</title>
     
-    <!-- Tailwind CSS (For modern styling) -->
+    <!-- Tailwind CSS (Design System) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
     
-    <!-- Font Awesome (For Icons) -->
+    <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- AOS (Animations on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js (Data Visualization) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+        body { font-family: 'Outfit', sans-serif; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 dark:bg-slate-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- DARK MODE TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-gray-200 dark:border-slate-700 hover:scale-110 transition">
+        <i class="fas fa-moon text-gray-800 dark:hidden"></i>
+        <i class="fas fa-sun text-yellow-400 hidden dark:block"></i>
+    </button>
 
     <!-- HERO SECTION -->
-    <header class="gradient-bg text-white pb-20 pt-10">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <!-- Profile Image Placeholder -->
-                <div class="w-40 h-40 md:w-48 md:h-48 flex-shrink-0 relative">
-                    <!-- INSTRUCTION: Replace 'profile.jpg' with your actual photo file name -->
-                    <img src="profile.png" onerror="this.src='https://ui-avatars.com/api/?name=Feyrouz+M&background=random&size=200'" alt="Feyrouz Mehalaine" class="w-full h-full object-cover rounded-full border-4 border-white shadow-xl">
+    <header class="relative bg-gradient-to-r from-blue-700 to-indigo-900 text-white pb-32 pt-20 overflow-hidden">
+        <!-- Animated Background Shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+            <div class="absolute bg-white rounded-full w-96 h-96 -top-20 -left-20 mix-blend-overlay filter blur-3xl animate-pulse"></div>
+            <div class="absolute bg-blue-400 rounded-full w-72 h-72 bottom-0 right-0 mix-blend-overlay filter blur-3xl opacity-50"></div>
+        </div>
+
+        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                
+                <!-- Profile Image with Glow Effect -->
+                <div class="relative group" data-aos="zoom-in">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="w-48 h-48 md:w-56 md:h-56 relative rounded-full border-4 border-white overflow-hidden shadow-2xl">
+                        <!-- REPLACE 'profile.jpg' with your actual photo file name -->
+                        <img src="profile.png" onerror="this.src='https://ui-avatars.com/api/?name=Feyrouz+M&background=0D8ABC&color=fff&size=256'" alt="Feyrouz Mehalaine" class="w-full h-full object-cover transform transition group-hover:scale-110 duration-500">
+                    </div>
                 </div>
                 
                 <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-2">Feyrouz Mehalaine</h1>
-                    <h2 class="text-xl md:text-2xl text-blue-100 font-light mb-4">Operations & Partnerships Manager</h2>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight">Feyrouz Mehalaine</h1>
                     
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm md:text-base">
-                        <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt"></i> Bab Ezzouar, Algiers</span>
-                        <span class="flex items-center gap-2"><i class="fas fa-envelope"></i> fayrouzmehalaine@gmail.com</span>
-                        <span class="flex items-center gap-2"><i class="fas fa-phone"></i> +213 773 665 871</span>
-                    </div>
+                    <!-- Typewriter Effect -->
+                    <h2 class="text-2xl md:text-3xl text-blue-200 font-light h-10">
+                        I am an <span id="typed-text" class="font-semibold text-white border-b-2 border-blue-400"></span>
+                    </h2>
+                    
+                    <p class="mt-6 text-blue-100 max-w-lg text-lg leading-relaxed">
+                        A versatile innovator bridging the gap between <strong>Operations, Commercial Strategy, and Data Analytics</strong>. I bring a unique 360° perspective—mastering everything from negotiation to technical automation. I am driven to modernize what I touch, transforming traditional workflows into efficient, data-driven ecosystems.
+                    </p>
 
-                    <div class="mt-6 flex gap-3 justify-center md:justify-start">
-                        <a href="mailto:fayrouzmehalaine@gmail.com" class="bg-white text-blue-900 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition shadow-md">
+                    <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="mailto:fayrouzmehalaine@gmail.com" class="px-8 py-3 bg-white text-blue-800 rounded-full font-bold hover:bg-blue-50 transition shadow-lg transform hover:-translate-y-1">
                             Contact Me
                         </a>
-                        <!-- Link to your LinkedIn if you have one -->
-                        <a href="https://www.linkedin.com/in/feyrouz-mehalaine-903050168/" target="_blank" class="border border-white text-white px-6 py-2 rounded-full font-semibold hover:bg-white/10 transition">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
+                        <div class="flex items-center gap-4 text-sm ml-2">
+                            <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt"></i> Algiers</span>
+                            <span class="flex items-center gap-2"><i class="fas fa-phone"></i> +213 773 665 871</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Wave Divider -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-gray-50 dark:fill-slate-900 transition-colors duration-300"></path>
+            </svg>
+        </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="container mx-auto px-6 max-w-5xl -mt-10 mb-20">
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-6 max-w-6xl -mt-10 mb-20 relative z-20">
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
             
-            <!-- LEFT COLUMN (Main Info) -->
-            <div class="md:col-span-2 space-y-8">
+            <!-- LEFT COLUMN (Experience & Stats) -->
+            <div class="lg:col-span-8 space-y-10">
                 
-                <!-- ABOUT ME CARD -->
-                <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-user"></i></span>
-                        About Me
-                    </h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Confirmed Operations Manager with 2+ years of experience in partnership management, workflow processing, and process automation within the insurance sector. Demonstrated expertise in production validation, financial reporting, and operational optimization. 
-                        <br><br>
-                        I specialize in digitizing manual processes and creating automation solutions using <strong>Power BI</strong> and <strong>Power Automate</strong>. Known for high precision (99.8% accuracy in financial reporting) and a strong focus on quality control.
-                    </p>
-                </section>
+                <!-- KEY METRICS STATS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up">
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm text-center border-b-4 border-blue-500 hover:transform hover:-translate-y-1 transition">
+                        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">70%</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Error Reduction</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm text-center border-b-4 border-green-500 hover:transform hover:-translate-y-1 transition">
+                        <div class="text-3xl font-bold text-green-600 dark:text-green-400">60%</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Time Saved</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm text-center border-b-4 border-purple-500 hover:transform hover:-translate-y-1 transition">
+                        <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">99.8%</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Financial Accuracy</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm text-center border-b-4 border-orange-500 hover:transform hover:-translate-y-1 transition">
+                        <div class="text-3xl font-bold text-orange-600 dark:text-orange-400">250+</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Users Trained</div>
+                    </div>
+                </div>
 
-                <!-- EXPERIENCE SECTION -->
-                <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-briefcase"></i></span>
+                <!-- PROFESSIONAL EXPERIENCE -->
+                <section class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg dark:shadow-slate-900/50" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-8 flex items-center gap-3">
+                        <span class="w-10 h-10 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-lg flex items-center justify-center"><i class="fas fa-briefcase"></i></span>
                         Professional Experience
                     </h3>
 
-                    <div class="relative border-l-2 border-gray-200 ml-3 space-y-10">
+                    <div class="relative border-l-2 border-gray-200 dark:border-slate-700 ml-3 space-y-12">
                         
-                        <!-- Job 1 -->
-                        <div class="ml-8 relative">
-                            <div class="absolute -left-[41px] bg-blue-600 w-5 h-5 rounded-full border-4 border-white"></div>
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                                <h4 class="text-lg font-bold text-gray-800">Partnerships & Distribution Specialist</h4>
-                                <span class="text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">May 2023 - Aug 2025</span>
+                        <!-- GULF INSURANCE GROUP (DETAILED) -->
+                        <div class="ml-10 relative">
+                            <div class="absolute -left-[49px] bg-blue-600 w-6 h-6 rounded-full border-4 border-white dark:border-slate-800 shadow-lg"></div>
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Partnerships & Distribution Specialist</h4>
+                                    <h5 class="text-blue-600 dark:text-blue-400 font-medium">Gulf Insurance Group | Algiers</h5>
+                                </div>
+                                <span class="text-xs font-bold bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full mt-2 sm:mt-0">May 2023 - Aug 2025</span>
                             </div>
-                            <h5 class="text-gray-600 italic mb-3">Gulf Insurance Group | Algiers, Algeria</h5>
-                            <ul class="list-disc list-outside text-gray-600 space-y-2 pl-4">
-                                <li><strong>Process Automation:</strong> Designed and deployed an automated subscription form (Adobe Pro) with auto-calculation, reducing data entry errors by <strong>70%</strong> and processing time by <strong>50%</strong>.</li>
-                                <li><strong>Digitalization:</strong> Fully digitized the credit advice recording process, eliminating <strong>100%</strong> of paper usage. Automated tracking (Quotes, Claims, KYC) via Power Automate, reducing manual reporting time by <strong>60%</strong>.</li>
-                                <li><strong>Financial Accuracy:</strong> Calculated monthly partner commissions and prepared financial situations (collections, receivables) with a <strong>99.8%</strong> precision rate.</li>
-                                <li><strong>Partnership Strategy:</strong> Validated daily production for 7+ partners. Negotiated 6 partnership conventions with legal/technical coordination. Developed partnerships with banks, brokers, and corporate clients.</li>
-                                <li><strong>Project Management:</strong> Coordinated 7 tender responses with a <strong>60% success rate</strong>. Piloted the launch of a mobile claims application (testing, anomaly management, user training).</li>
-                                <li><strong>Leadership & Events:</strong> Led quarterly steering committees. Organized the Brokers Annual Meeting. Created and managed an internal HR challenge. Trained <strong>250+ users</strong> on products and claims procedures.</li>
+
+                            <!-- Detailed Categories -->
+                            <div class="space-y-6 mt-4">
+                                
+                                <!-- 1. Automation -->
+                                <div>
+                                    <h6 class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-2 uppercase tracking-wide border-b border-gray-100 dark:border-slate-700 pb-1">Process Automation & Digitalization</h6>
+                                    <ul class="list-disc list-outside text-gray-600 dark:text-gray-300 space-y-2 pl-4 text-sm leading-relaxed">
+                                        <li>Designed and deployed an <strong>automated subscription form (Adobe Pro)</strong> with auto-calculation: Reduced data entry errors by <strong>70%</strong> and processing time by <strong>50%</strong>.</li>
+                                        <li><strong>Fully digitized</strong> the recording and printing process of credit advices (avis d'aliment), achieving <strong>100% paperless</strong> workflow.</li>
+                                        <li>Automated tracking reports (quotes, claims, KYC) via <strong>Power Automate</strong> with notifications & dashboards, cutting manual reporting time by <strong>60%</strong>.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- 2. Finance -->
+                                <div>
+                                    <h6 class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-2 uppercase tracking-wide border-b border-gray-100 dark:border-slate-700 pb-1">Financial Management & Reporting</h6>
+                                    <ul class="list-disc list-outside text-gray-600 dark:text-gray-300 space-y-2 pl-4 text-sm leading-relaxed">
+                                        <li>Prepared semi-annual performance analyses and monthly financial situations (collections, receivables, recoveries) with <strong>99.8% precision</strong>.</li>
+                                        <li>Calculated and controlled monthly partner commissions, ensuring strict compliance.</li>
+                                        <li>Validated daily production for a portfolio of <strong>7+ partners</strong>, ensuring transaction accuracy.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- 3. Strategy & Partnerships -->
+                                <div>
+                                    <h6 class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-2 uppercase tracking-wide border-b border-gray-100 dark:border-slate-700 pb-1">Partnership Strategy</h6>
+                                    <ul class="list-disc list-outside text-gray-600 dark:text-gray-300 space-y-2 pl-4 text-sm leading-relaxed">
+                                        <li>Developed strategic partnerships with banks, brokers, and corporate clients (local & international).</li>
+                                        <li>Negotiated <strong>6 partnership conventions</strong> in coordination with legal, technical, and commercial departments.</li>
+                                        <li>Led quarterly steering committees with performance analysis and recommendations.</li>
+                                        <li>Coordinated <strong>7 tender responses</strong> with a <strong>60% success rate</strong>.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- 4. Projects & Leadership -->
+                                <div>
+                                    <h6 class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-2 uppercase tracking-wide border-b border-gray-100 dark:border-slate-700 pb-1">Project Leadership & Training</h6>
+                                    <ul class="list-disc list-outside text-gray-600 dark:text-gray-300 space-y-2 pl-4 text-sm leading-relaxed">
+                                        <li>Piloted the launch of a <strong>mobile claims application</strong> (user tests, anomaly management, end-user training).</li>
+                                        <li>Trained <strong>250+ users</strong> (bank networks, corporate clients) on insurance products and remote claims procedures.</li>
+                                        <li>Organized the <strong>Brokers Annual Meeting</strong> (logistics, presentations, communication).</li>
+                                        <li>Created and managed an internal challenge in collaboration with HR.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SAG -->
+                        <div class="ml-10 relative">
+                            <div class="absolute -left-[49px] bg-gray-300 dark:bg-slate-600 w-6 h-6 rounded-full border-4 border-white dark:border-slate-800"></div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Admission Coordinator</h4>
+                            <h5 class="text-gray-500 dark:text-gray-400 font-medium mb-2">SAG (Study Abroad Group) | Algiers</h5>
+                            <span class="text-xs text-gray-400 block mb-2">Oct 2022 - Mar 2023</span>
+                            <ul class="list-disc list-outside text-gray-600 dark:text-gray-300 space-y-1 pl-4 text-sm">
+                                <li>Accompanied <strong>200+ international students</strong> (Algeria, Morocco, Chile) through admission processes.</li>
+                                <li>Coordinated with 20+ international partner universities to resolve integration issues.</li>
+                                <li>Created a tracking system that significantly increased processing efficiency.</li>
                             </ul>
                         </div>
 
-                        <!-- Job 2 -->
-                        <div class="ml-8 relative">
-                            <div class="absolute -left-[41px] bg-gray-300 w-5 h-5 rounded-full border-4 border-white"></div>
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                                <h4 class="text-lg font-bold text-gray-800">Admission Coordinator</h4>
-                                <span class="text-sm text-gray-500 font-semibold bg-gray-100 px-3 py-1 rounded-full">Oct 2022 - Mar 2023</span>
-                            </div>
-                            <h5 class="text-gray-600 italic mb-3">SAG (Study Abroad Group) | Algiers, Algeria</h5>
-                            <ul class="list-disc list-outside text-gray-600 space-y-2 pl-4">
-                                <li>Accompanied 200+ international students (Algeria, Morocco, Chile) through university admission and visa procedures.</li>
-                                <li>Coordinated with international partner universities to resolve integration issues.</li>
-                                <li>Organized weekly sales meetings and monthly Country Manager meetings to track performance.</li>
-                                <li>Created and maintained a file tracking system that significantly increased processing efficiency.</li>
-                            </ul>
+                        <!-- ALGEX -->
+                        <div class="ml-10 relative">
+                            <div class="absolute -left-[49px] bg-gray-300 dark:bg-slate-600 w-6 h-6 rounded-full border-4 border-white dark:border-slate-800"></div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Export Consultant (Intern)</h4>
+                            <h5 class="text-gray-500 dark:text-gray-400 font-medium mb-2">ALGEX | Algiers</h5>
+                            <span class="text-xs text-gray-400 block mb-2">Jan 2022 - May 2022</span>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Analyzed export barriers for Algerian products; identified operational obstacles with strategic recommendations included in the annual report.
+                            </p>
                         </div>
-
-                        <!-- Job 3 -->
-                        <div class="ml-8 relative">
-                            <div class="absolute -left-[41px] bg-gray-300 w-5 h-5 rounded-full border-4 border-white"></div>
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                                <h4 class="text-lg font-bold text-gray-800">Export Consultant (Intern)</h4>
-                                <span class="text-sm text-gray-500 font-semibold bg-gray-100 px-3 py-1 rounded-full">Jan 2022 - May 2022</span>
-                            </div>
-                            <h5 class="text-gray-600 italic mb-3">ALGEX | Algiers, Algeria</h5>
-                            <ul class="list-disc list-outside text-gray-600 space-y-2 pl-4">
-                                <li>Analyzed export barriers for Algerian products via sectoral studies and interviews.</li>
-                                <li>Identified operational obstacles and provided strategic recommendations included in the agency's annual report.</li>
-                                <li>Accompanied exhibitors at the SIPSA International Fair to promote Algerian products.</li>
-                            </ul>
-                        </div>
-
                     </div>
                 </section>
-                
-                <!-- EDUCATION SECTION -->
-                <section class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-graduation-cap"></i></span>
-                        Education
+
+                <!-- FEATURED PROJECTS -->
+                <section class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg dark:shadow-slate-900/50" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded-lg flex items-center justify-center"><i class="fas fa-project-diagram"></i></span>
+                        Technical Projects
                     </h3>
-                    <div class="space-y-6">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800">Master 2 in International Business</h4>
-                            <p class="text-blue-600 text-sm mb-1">2019 - 2022</p>
-                            <p class="text-gray-600">HEC Algiers</p>
-                            <p class="text-xs text-gray-500 mt-2">Thesis: Analysis of export constraints for Algerian companies. Admission via national contest.</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Project 1 -->
+                        <div class="group border border-gray-100 dark:border-slate-700 rounded-xl p-5 hover:shadow-xl transition duration-300 bg-gray-50 dark:bg-slate-700/30">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="bg-red-100 text-red-600 p-2 rounded-lg"><i class="fas fa-file-pdf"></i></div>
+                                <span class="text-xs bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 px-2 py-1 rounded">Automation</span>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2 dark:text-white">Smart Subscription Form</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Developed an intelligent Adobe Pro form with integrated auto-calculations for insurance premiums.</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs border border-gray-300 dark:border-slate-500 px-2 py-1 rounded-full dark:text-gray-300">Adobe Pro</span>
+                                <span class="text-xs border border-gray-300 dark:border-slate-500 px-2 py-1 rounded-full dark:text-gray-300">JS Script</span>
+                            </div>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800">Economic & Commercial Prep Classes</h4>
-                            <p class="text-blue-600 text-sm mb-1">2017 - 2019</p>
-                            <p class="text-gray-600">ESC Algiers</p>
-                            <p class="text-xs text-gray-500 mt-2">Intensive training for business school competitive exams.</p>
-                        </div>
-                         <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800">Scientific Baccalaureate</h4>
-                            <p class="text-blue-600 text-sm mb-1">2017</p>
-                            <p class="text-gray-600">Lycée Scientifique Souk Ahras</p>
-                            <p class="text-xs text-gray-500 mt-2">Mention: Très Bien (Very Good)</p>
+
+                        <!-- Project 2 -->
+                        <div class="group border border-gray-100 dark:border-slate-700 rounded-xl p-5 hover:shadow-xl transition duration-300 bg-gray-50 dark:bg-slate-700/30">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="bg-yellow-100 text-yellow-600 p-2 rounded-lg"><i class="fas fa-chart-bar"></i></div>
+                                <span class="text-xs bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 px-2 py-1 rounded">Data</span>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2 dark:text-white">Financial Dashboard</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Created real-time tracking dashboards for claims and receivables with automated alerts.</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs border border-gray-300 dark:border-slate-500 px-2 py-1 rounded-full dark:text-gray-300">Power BI</span>
+                                <span class="text-xs border border-gray-300 dark:border-slate-500 px-2 py-1 rounded-full dark:text-gray-300">Excel VBA</span>
+                            </div>
                         </div>
                     </div>
                 </section>
             </div>
 
-            <!-- RIGHT COLUMN (Sidebar Info) -->
-            <div class="space-y-8">
+            <!-- RIGHT COLUMN (Skills & Education) -->
+            <div class="lg:col-span-4 space-y-8">
                 
-                <!-- SKILLS -->
-                <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">Technical Skills</h3>
-                    
-                    <div class="mb-4">
-                        <span class="text-sm font-semibold text-gray-700 block mb-1">Data & Analysis</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-md">Power BI (DAX)</span>
-                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-md">Excel (Adv/VBA)</span>
-                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-md">Power Automate</span>
-                        </div>
+                <!-- RADAR CHART (Visual Skills) -->
+                <section class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg dark:shadow-slate-900/50" data-aos="fade-left">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Technical Expertise</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="skillsChart"></canvas>
                     </div>
-
-                    <div class="mb-4">
-                        <span class="text-sm font-semibold text-gray-700 block mb-1">Tools</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">Adobe Pro</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">SharePoint</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">Canva (Adv)</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">Office 365</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">CRM Systems</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <span class="text-sm font-semibold text-gray-700 block mb-1">Operational</span>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">Flow Management</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">Quality Control</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">Financial Reporting</span>
-                        </div>
+                    <div class="mt-4 flex flex-wrap gap-2 justify-center">
+                        <span class="text-xs bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-200 px-2 py-1 rounded">Power BI</span>
+                        <span class="text-xs bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-200 px-2 py-1 rounded">VBA</span>
+                        <span class="text-xs bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-200 px-2 py-1 rounded">Automate</span>
+                        <span class="text-xs bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-200 px-2 py-1 rounded">Canva</span>
                     </div>
                 </section>
 
                 <!-- LANGUAGES -->
-                <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">Languages</h3>
-                    <div class="space-y-3">
+                <section class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg dark:shadow-slate-900/50" data-aos="fade-left" data-aos-delay="100">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Languages</h3>
+                    <div class="space-y-4">
                         <div>
-                            <div class="flex justify-between text-sm mb-1">
+                            <div class="flex justify-between text-sm mb-1 dark:text-gray-300">
                                 <span>French (C1)</span>
-                                <span class="text-gray-500">Professional</span>
+                                <span>Professional</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                                 <div class="bg-blue-600 h-2 rounded-full" style="width: 95%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-sm mb-1">
+                            <div class="flex justify-between text-sm mb-1 dark:text-gray-300">
                                 <span>English (C1)</span>
-                                <span class="text-gray-500">Advanced</span>
+                                <span>Advanced</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                                 <div class="bg-blue-600 h-2 rounded-full" style="width: 90%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span>Arabic</span>
-                                <span class="text-gray-500">Native</span>
+                            <div class="flex justify-between text-sm mb-1 dark:text-gray-300">
+                                <span>Arabic (Native)</span>
+                                <span>Native</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                                 <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- CERTIFICATIONS -->
-                <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">Certifications</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
-                            <div>
-                                <p class="font-bold text-sm text-gray-800">Introduction to Power BI</p>
-                                <p class="text-xs text-gray-500">Code 213 | Sep - Nov 2025</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
-                            <div>
-                                <p class="font-bold text-sm text-gray-800">Excel for Business</p>
-                                <p class="text-xs text-gray-500">Alcodefi | Feb 2025</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
-                            <div>
-                                <p class="font-bold text-sm text-gray-800">Team in Action (Mgmt)</p>
-                                <p class="text-xs text-gray-500">IEMA | July 2025</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
-                            <div>
-                                <p class="font-bold text-sm text-gray-800">Soft Skills & Leadership</p>
-                                <p class="text-xs text-gray-500">Boost Training Center | Apr 2024</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
-                            <div>
-                                <p class="font-bold text-sm text-gray-800">Takaful & Tontine</p>
-                                <p class="text-xs text-gray-500">Alcodefi | Feb 2023</p>
-                            </div>
-                        </li>
-                    </ul>
+                <!-- EDUCATION -->
+                <section class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg dark:shadow-slate-900/50" data-aos="fade-left" data-aos-delay="200">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Education</h3>
+                    <div class="space-y-4">
+                        <div class="pb-4 border-b border-gray-100 dark:border-slate-700">
+                            <h4 class="font-bold text-gray-800 dark:text-gray-200 text-sm">Master 2 in International Business</h4>
+                            <p class="text-xs text-blue-600 dark:text-blue-400">HEC Algiers | 2019 - 2022</p>
+                            <p class="text-xs text-gray-500 mt-1">Thesis: Analysis of export constraints.</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-100 dark:border-slate-700">
+                            <h4 class="font-bold text-gray-800 dark:text-gray-200 text-sm">Econ & Commercial Prep Classes</h4>
+                            <p class="text-xs text-blue-600 dark:text-blue-400">ESC Algiers | 2017 - 2019</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-200 text-sm">Scientific Baccalaureate</h4>
+                            <p class="text-xs text-blue-600 dark:text-blue-400">Mention Très Bien | 2017</p>
+                        </div>
+                    </div>
                 </section>
 
-                <!-- SOFT SKILLS / ASSETS -->
-                 <section class="bg-gradient-to-br from-blue-900 to-blue-800 p-6 rounded-xl shadow-sm text-white">
-                    <h3 class="text-lg font-bold mb-4 pb-2 border-b border-blue-700">Professional Assets</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-300"></i> Operational Rigor & Detail</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-300"></i> Fast Learning Agility</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-300"></i> Continuous Improvement</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-300"></i> Cross-functional Collaboration</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-blue-300"></i> Results Oriented</li>
+                <!-- CERTIFICATIONS -->
+                <section class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg dark:shadow-slate-900/50" data-aos="fade-left" data-aos-delay="300">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Certifications</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold block">Intro to Power BI</span>
+                                <span class="text-xs text-gray-500">Code 213 | 2025</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold block">Excel for Business</span>
+                                <span class="text-xs text-gray-500">Alcodefi | 2025</span>
+                            </div>
+                        </li>
+                         <li class="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold block">Team Management</span>
+                                <span class="text-xs text-gray-500">IEMA | 2025</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-certificate text-yellow-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold block">Takaful (Islamic Insurance)</span>
+                                <span class="text-xs text-gray-500">Alcodefi | 2023</span>
+                            </div>
+                        </li>
                     </ul>
                 </section>
 
@@ -295,17 +370,81 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-gray-200 py-8 mt-10">
-        <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
-            <p>&copy; 2025 Feyrouz Mehalaine. Built with HTML & Tailwind CSS.</p>
-            <div class="mt-2 flex justify-center gap-4">
-                <a href="#" class="hover:text-blue-600 transition">GitHub</a>
-                <a href="https://www.linkedin.com/in/feyrouz-mehalaine-903050168/" target="_blank" class="hover:text-blue-600 transition">LinkedIn</a>
-                <a href="mailto:fayrouzmehalaine@gmail.com" class="hover:text-blue-600 transition">Email</a>
-            </div>
+    <footer class="text-center py-8 text-gray-500 text-sm dark:text-gray-400 border-t border-gray-200 dark:border-slate-800 mt-10">
+        <p>&copy; 2025 Feyrouz Mehalaine. Hosted on GitHub.</p>
+        <div class="flex justify-center gap-4 mt-2">
+            <a href="#" class="hover:text-blue-500 transition"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="mailto:fayrouzmehalaine@gmail.com" class="hover:text-blue-500 transition"><i class="fas fa-envelope fa-lg"></i></a>
         </div>
     </footer>
 
+    <!-- INTERACTIVE SCRIPTS -->
+    
+    <!-- 1. Typewriter Effect -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#typed-text', {
+            strings: ['Operations Manager', 'Business Strategist', 'Data Analyst', 'Process Innovator'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+    </script>
+
+    <!-- 2. Scroll Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <!-- 3. Skills Radar Chart -->
+    <script>
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Power BI', 'Excel VBA', 'Power Automate', 'Adobe Pro', 'CRM', 'Canva'],
+                datasets: [{
+                    label: 'Skill Level',
+                    data: [85, 90, 80, 95, 75, 90],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(156, 163, 175, 0.2)' },
+                        grid: { color: 'rgba(156, 163, 175, 0.2)' },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { display: false, backdropColor: 'transparent' },
+                        pointLabels: {
+                            font: { size: 11, family: "'Outfit', sans-serif" },
+                            color: '#64748b' // Slate-500
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+
+    <!-- 4. Dark Mode Logic -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+    </script>
 </body>
 </html>
